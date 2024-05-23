@@ -31,6 +31,8 @@ class User extends Authenticatable
         'current_balance',
         'debit_reason',
         'password',
+        'user_agent',
+        'otp',
         'role',
         'status',
         'flag',
@@ -38,6 +40,7 @@ class User extends Authenticatable
         'created_by',
         'updated_by',
         'deleted_by',
+        'last_login_at',
     ];
 
     /**
@@ -71,6 +74,8 @@ class User extends Authenticatable
         'current_balance'        => 'integer',
         'debit_reason'           => 'string',
         'password'               => 'string',
+        'user_agent'             => 'string',
+        'otp'                    => 'string',
         'role'                   => 'string',
         'status'                 => 'string',
         'flag'                   => 'integer',
@@ -78,6 +83,7 @@ class User extends Authenticatable
         'created_by'             => 'integer',
         'updated_by'             => 'integer',
         'deleted_by'             => 'integer',
+        'last_login_at'          => 'datetime',
         'created_at'             => 'datetime',
         'updated_at'             => 'datetime',
         'deleted_at'             => 'datetime',

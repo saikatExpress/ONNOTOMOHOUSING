@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -40,6 +41,13 @@ Route::controller(AuthController::class)->group(function(){
     Route::get('/', 'login')->name('login');
     Route::get('/sign/up', 'signUp')->name('sign.up');
     Route::post('/log/store', 'authCheck')->name('log.store');
+});
+
+Route::middleware(['auth'])->group(function(){
+    Route::controller(UserController::class)->group(function(){
+        Route::get('/user/dashboard', 'index')->name('user.dashboard');
+        Route::get('/user/profile', 'userProfile')->name('user.profile');
+    });
 });
 
 Route::middleware(['auth'])->group(function(){

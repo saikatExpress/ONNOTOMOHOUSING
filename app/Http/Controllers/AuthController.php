@@ -61,7 +61,7 @@ class AuthController extends Controller
                 $request->session()->put('user_id', $authUser->id);
 
                 if($user->role === 'user') {
-                    // $user->update(['otp' => null, 'user_agent' => $request->header('User-Agent'), 'last_login_at' => Carbon::now()]);
+                    $user->update(['otp' => null, 'user_agent' => $request->header('User-Agent'), 'last_login_at' => Carbon::now()]);
                     return redirect()->route('user.dashboard');
                 } elseif($user->role === 'admin') {
                     // $user->update(['otp' => null, 'user_agent' => $request->header('User-Agent'), 'last_login_at' => Carbon::now()]);

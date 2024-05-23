@@ -36,7 +36,7 @@
                     <div class="card-body">
                         <div class="box">
                             <div class="box-header">
-                            <h3 class="box-title">User Table With Full Features</h3>
+                            <h3 class="box-title">Share Holder List</h3>
                             </div>
                             <!-- /.box-header -->
                             <div class="box-body">
@@ -73,6 +73,7 @@
                                         <th>Platform(s)</th>
                                         <th>Engine version</th>
                                         <th>CSS grade</th>
+                                        <th>Actions grade</th>
                                     </tr>
                                 </tfoot>
                             </table>
