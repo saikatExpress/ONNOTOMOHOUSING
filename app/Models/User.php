@@ -18,9 +18,26 @@ class User extends Authenticatable
      * @var array<int, string>
      */
     protected $fillable = [
+        'profile_image',
         'name',
+        'mobile',
+        'whatsapp',
         'email',
+        'address',
+        'country',
+        'state',
+        'city',
+        'total_deposite_balance',
+        'current_balance',
+        'debit_reason',
         'password',
+        'role',
+        'status',
+        'flag',
+        'is_paid',
+        'created_by',
+        'updated_by',
+        'deleted_by',
     ];
 
     /**
@@ -39,6 +56,30 @@ class User extends Authenticatable
      * @var array<string, string>
      */
     protected $casts = [
-        'email_verified_at' => 'datetime',
+        'id'                     => 'integer',
+        'profile_image'          => 'string',
+        'name'                   => 'string',
+        'mobile'                 => 'string',
+        'whatsapp'               => 'string',
+        'email'                  => 'string',
+        'email_verified_at'      => 'datetime',
+        'address'                => 'string',
+        'country'                => 'string',
+        'state'                  => 'string',
+        'city'                   => 'string',
+        'total_deposite_balance' => 'integer',
+        'current_balance'        => 'integer',
+        'debit_reason'           => 'string',
+        'password'               => 'string',
+        'role'                   => 'string',
+        'status'                 => 'string',
+        'flag'                   => 'integer',
+        'is_paid'                => 'integer',
+        'created_by'             => 'integer',
+        'updated_by'             => 'integer',
+        'deleted_by'             => 'integer',
+        'created_at'             => 'datetime',
+        'updated_at'             => 'datetime',
+        'deleted_at'             => 'datetime',
     ];
 }

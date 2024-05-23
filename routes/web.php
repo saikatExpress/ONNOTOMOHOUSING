@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -38,4 +39,14 @@ Route::get('/clear-cache', function() {
 Route::controller(AuthController::class)->group(function(){
     Route::get('/', 'login')->name('login');
     Route::get('/sign/up', 'signUp')->name('sign.up');
+    Route::post('/log/store', 'authCheck')->name('log.store');
 });
+
+Route::middleware(['auth'])->group(function(){
+    Route::controller(AdminController::class)->group(function(){
+        Route::get('/admin/dashboard', 'adminDashBoard')->name('admin.dashboard');
+        Route::get('/create/user', 'create')->name('create.user');
+    });
+});
+
+Route::get('/logout', [AuthController::class, 'logout'])->name('logout.us');
