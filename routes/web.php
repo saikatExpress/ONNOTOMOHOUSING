@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\AuthController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
 
@@ -33,6 +34,8 @@ Route::get('/clear-cache', function() {
     return "Cache is cleared";
 })->name('clear.cache');
 
-Route::get('/', function () {
-    return view('welcome');
+
+Route::controller(AuthController::class)->group(function(){
+    Route::get('/', 'login')->name('login');
+    Route::get('/sign/up', 'signUp')->name('sign.up');
 });
