@@ -12,6 +12,7 @@
   <link rel="stylesheet" href="{{ asset('admin/bower_components/font-awesome/css/font-awesome.min.css') }}">
   <!-- Ionicons -->
   <link rel="stylesheet" href="{{ asset('admin/bower_components/Ionicons/css/ionicons.min.css') }}">
+  <link rel="stylesheet" href="{{ asset('admin/bower_components/datatables.net-bs/css/dataTables.bootstrap.min.css') }}">
   <!-- Theme style -->
   <link rel="stylesheet" href="{{ asset('admin/dist/css/AdminLTE.min.css') }}">
   <!-- AdminLTE Skins. Choose a skin from the css/skins
@@ -249,8 +250,8 @@
             <!-- User Account: style can be found in dropdown.less -->
             <li class="dropdown user user-menu">
                 <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                <img src="dist/img/user2-160x160.jpg" class="user-image" alt="User Image">
-                <span class="hidden-xs">Alexander Pierce</span>
+                <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
+                <span class="hidden-xs">{{ auth()->user()->name }}</span>
                 </a>
                 <ul class="dropdown-menu">
                 <!-- User image -->
@@ -303,7 +304,7 @@
         <!-- Sidebar user panel -->
         <div class="user-panel">
             <div class="pull-left image">
-            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+            <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
             </div>
             <div class="pull-left info">
             <p>{{ auth()->user()->name }}</p>
@@ -352,7 +353,7 @@
             </a>
             <ul class="treeview-menu">
                 <li><a href="{{ route('create.user') }}"><i class="fa fa-circle-o"></i> Create User</a></li>
-                <li><a href="pages/layout/boxed.html"><i class="fa fa-circle-o"></i> User List</a></li>
+                <li><a href="{{ route('user.list') }}"><i class="fa fa-circle-o"></i> User List</a></li>
                 <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Role</a></li>
                 <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Permission</a></li>
             </ul>
@@ -715,9 +716,9 @@
 <!-- ./wrapper -->
 
 <!-- jQuery 3 -->
-    <script src="bower_components/jquery/dist/jquery.min.js"></script>
+    <script src="{{ asset('admin/bower_components/jquery/dist/jquery.min.js') }}"></script>
     <!-- jQuery UI 1.11.4 -->
-    <script src="bower_components/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{{ asset('admin/bower_components/jquery-ui/jquery-ui.min.js') }}"></script>
     <!-- Resolve conflict in jQuery UI tooltip with Bootstrap tooltip -->
     <script>
     $.widget.bridge('uibutton', $.ui.button);
@@ -727,6 +728,8 @@
     <!-- Morris.js charts -->
     <script src="{{ asset('admin/bower_components/raphael/raphael.min.js') }}"></script>
     <script src="{{ asset('admin/bower_components/morris.js/morris.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net/js/jquery.dataTables.min.js') }}"></script>
+    <script src="{{ asset('admin/bower_components/datatables.net-bs/js/dataTables.bootstrap.min.js') }}"></script>
     <!-- Sparkline -->
     <script src="{{ asset('admin/bower_components/jquery-sparkline/dist/jquery.sparkline.min.js') }}"></script>
     <!-- jvectormap -->
@@ -751,5 +754,18 @@
     <script src="{{ asset('admin/dist/js/pages/dashboard.js') }}"></script>
     <!-- AdminLTE for demo purposes -->
     <script src="{{ asset('admin/dist/js/demo.js') }}"></script>
+    <script>
+        $(function () {
+            $('#example1').DataTable()
+            $('#example2').DataTable({
+            'paging'      : true,
+            'lengthChange': false,
+            'searching'   : false,
+            'ordering'    : true,
+            'info'        : true,
+            'autoWidth'   : false
+            })
+        })
+    </script>
 </body>
 </html>

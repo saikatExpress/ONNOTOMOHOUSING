@@ -5,6 +5,11 @@
             Dashboard
             <small>Control panel</small>
         </h1>
+        <p class="text-right">
+            <a class="btn btn-sm btn-success" href="{{ route('user.list') }}">
+                User List
+            </a>
+        </p>
         <ol class="breadcrumb">
             <li><a href="{{ route('admin.dashboard') }}"><i class="fa fa-dashboard"></i> Home</a></li>
             <li class="active">Create User</li>
@@ -16,7 +21,8 @@
             <div class="col-md-8">
                 <div class="card">
                     <div class="card-body">
-                        <form action="" method="post" enctype="multipart/form-data">
+                        <form action="{{ route('user.store') }}" method="post" enctype="multipart/form-data">
+                            @csrf
                             <div class="form-group">
                                 <label for="">Profile Image</label>
                                 <input type="file" name="profile_image" class="form-control" placeholder="Image">
@@ -97,6 +103,10 @@
                                         <strong>{{ $message }}</strong>
                                     </span>
                                 @enderror
+                            </div>
+
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-sm btn-primary">Add User</button>
                             </div>
                         </form>
                     </div>

@@ -45,7 +45,9 @@ Route::controller(AuthController::class)->group(function(){
 Route::middleware(['auth'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'adminDashBoard')->name('admin.dashboard');
+        Route::get('/user/list', 'index')->name('user.list');
         Route::get('/create/user', 'create')->name('create.user');
+        Route::post('/user/store', 'store')->name('user.store');
     });
 });
 
