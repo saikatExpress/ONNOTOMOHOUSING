@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
+use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
@@ -73,6 +74,13 @@ Route::middleware(['auth'])->group(function(){
 
     Route::controller(BillingController::class)->group(function(){
         Route::get('/user/payment', 'billIndex')->name('user.payment');
+    });
+
+    Route::controller(CategoryController::class)->group(function(){
+        Route::get('/catgeory/list', 'index')->name('category.list');
+        Route::post('/category/store', 'store')->name('category.store');
+        Route::post('/category/update', 'update')->name('category.update');
+        Route::get('/delete/category/{id}', 'destroy');
     });
 
     Route::controller(PaymentController::class)->group(function(){

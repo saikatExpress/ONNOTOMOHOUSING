@@ -2,20 +2,22 @@
 
 namespace App\View\Components;
 
-use App\Models\Payment;
 use Closure;
-use Illuminate\Contracts\View\View;
+use App\Models\Payment;
+use App\Models\Category;
 use Illuminate\View\Component;
+use Illuminate\Contracts\View\View;
 
 class SideBar extends Component
 {
-    public $totalPayments;
+    public $totalPayments,$totalCatgeories;
     /**
      * Create a new component instance.
      */
     public function __construct()
     {
         $this->totalPayments = Payment::where('is_approve', 0)->count();
+        $this->totalCatgeories = Category::count();
     }
 
     /**

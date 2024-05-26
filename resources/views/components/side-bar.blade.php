@@ -43,13 +43,25 @@
         </a>
     </li>
 
+    <li class="treeview">
+        <a href="#">
+        <i class="fa fa-pie-chart"></i>
+        <span>Expense</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li><a href="../charts/chartjs.html"><i class="fa fa-circle-o"></i> Create Expense</a></li>
+            <li><a href="../charts/morris.html"><i class="fa fa-circle-o"></i> Expense List</a></li>
+        </ul>
+    </li>
+
     <li>
-        <a href="pages/mailbox/mailbox.html">
-            <i class="fa fa-envelope"></i> <span>Mailbox</span>
-            <span class="pull-right-container">
-            <small class="label pull-right bg-yellow">12</small>
-            <small class="label pull-right bg-green">16</small>
-            <small class="label pull-right bg-red">5</small>
+        <a href="{{ route('category.list') }}">
+            <i class="fa-solid fa-list"></i> <span>Category</span>
+                <span class="pull-right-container">
+                <small class="label pull-right bg-yellow">{{ $totalCatgeories }}</small>
             </span>
         </a>
     </li>
