@@ -162,6 +162,10 @@ class PaymentController extends Controller
             $res = $payment->update(['is_approve' => 1, 'approve_by' => Auth::id(), 'updated_at' => Carbon::now()]);
 
             if($res){
+                $user = User::find($payment->user_id);
+                $previousDeposite = $user->total_deposite_balance;
+                $newBalance = ($previousDeposite) ?? 0 + $payment->amount;
+                $user->update(['total_deposite_balance' => $newBalance]);
                 return response()->json(['success' => true]);
             }
         }

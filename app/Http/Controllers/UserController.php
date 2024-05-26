@@ -12,7 +12,9 @@ class UserController extends Controller
 {
     public function index()
     {
-        return view('user.home.index');
+        $totalCashDeposite = User::where('id', Auth::id())->sum('total_deposite_balance');
+
+        return view('user.home.index', compact('totalCashDeposite'));
     }
 
     public function userProfile()

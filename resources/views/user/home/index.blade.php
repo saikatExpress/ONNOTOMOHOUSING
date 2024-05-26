@@ -11,7 +11,7 @@
               </div>
               <div class="text-end pt-1">
                 <p class="text-sm mb-0 text-capitalize">Total Cash Deposite</p>
-                <h4 class="mb-0">$53k</h4>
+                <h4 class="mb-0">{{ number_format($totalCashDeposite) }}</h4>
               </div>
             </div>
             <hr class="dark horizontal my-0">
