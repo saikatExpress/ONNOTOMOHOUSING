@@ -2,6 +2,8 @@
 
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\AuthController;
+use App\Http\Controllers\BillingController;
+use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -47,6 +49,12 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(UserController::class)->group(function(){
         Route::get('/user/dashboard', 'index')->name('user.dashboard');
         Route::get('/user/profile', 'userProfile')->name('user.profile');
+        Route::post('/profile/update', 'update')->name('profile.update');
+    });
+
+    Route::controller(PaymentController::class)->group(function(){
+        Route::get('/payment', 'index')->name('payment');
+        Route::post('/payment/store', 'store')->name('payment.store');
     });
 });
 
@@ -56,6 +64,9 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/user/list', 'index')->name('user.list');
         Route::get('/create/user', 'create')->name('create.user');
         Route::post('/user/store', 'store')->name('user.store');
+    });
+    Route::controller(BillingController::class)->group(function(){
+        Route::get('/billing', 'index')->name('billing');
     });
 });
 
