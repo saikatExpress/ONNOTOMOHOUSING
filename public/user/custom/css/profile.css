@@ -53,6 +53,16 @@
   display: none;
 }
 
+.image-preview {
+    position: absolute;
+    display: none;
+    z-index: 1000;
+    border: 1px solid #ddd;
+    background: #fff;
+    padding: 5px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+}
+
 .image-preview:hover .remove-image {
   display: block;
 }

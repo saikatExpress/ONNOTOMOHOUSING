@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\admin;
 
 use App\Models\User;
+use App\Models\Payment;
 use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -29,7 +30,11 @@ class AdminController extends Controller
 
     public function adminDashBoard()
     {
-        return view('admin.home.index');
+        $data['totalDeposite'] = Payment::where('is_approve', 1)->sum('amount');
+        $data['totalShareHolder'] = User::where('role', 'user')->count();
+        $data['activeTotalShareHolder'] = User::where('role', 'user')->where('status', '1')->count();
+
+        return view('admin.home.index')->with($data);
     }
 
     public function create()

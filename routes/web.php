@@ -56,6 +56,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/payment', 'index')->name('payment');
         Route::post('/payment/store', 'store')->name('payment.store');
     });
+
+    Route::controller(BillingController::class)->group(function(){
+        Route::get('/billing', 'index')->name('billing');
+    });
 });
 
 Route::middleware(['auth'])->group(function(){
@@ -65,8 +69,18 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/create/user', 'create')->name('create.user');
         Route::post('/user/store', 'store')->name('user.store');
     });
+
+
     Route::controller(BillingController::class)->group(function(){
-        Route::get('/billing', 'index')->name('billing');
+        Route::get('/user/payment', 'billIndex')->name('user.payment');
+    });
+
+    Route::controller(PaymentController::class)->group(function(){
+        Route::get('/give/approve/payment/{id}', 'giveApprovePayment');
+        Route::post('/save/payment', 'savePayment')->name('payment.save');
+        Route::post('/payment/update/{id}', 'update');
+        Route::get('/fetch/payment/{id}', 'show');
+        Route::get('/delete/payment/{id}', 'destroy');
     });
 });
 
