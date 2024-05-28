@@ -79,7 +79,7 @@
         </a>
         <ul class="treeview-menu">
             <li>
-                <a href="{{ route('create.expense') }}">
+                <a href="{{ route('create.report') }}">
                     <i class="fa fa-circle-o"></i>
                     Debit/Credit Report
                 </a>
@@ -121,15 +121,15 @@
         </a>
         <ul class="treeview-menu">
             <li>
-                <a href="{{ route('create.announce') }}">
+                <a href="{{ route('create.schedule') }}">
                     <i class="fa fa-circle-o"></i>
-                    Create Announce
+                    Create Schedule
                 </a>
             </li>
             <li>
                 <a href="{{ route('announce.list') }}">
                     <i class="fa fa-circle-o"></i>
-                    Announce List
+                    Schedule List
                 </a>
             </li>
         </ul>

@@ -7,6 +7,8 @@ use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CategoryController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\ReportController;
+use App\Http\Controllers\ScheduleController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 use Illuminate\Support\Facades\Artisan;
@@ -101,6 +103,19 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/expense/store', 'store')->name('cost.store');
         Route::post('/expense/update', 'update')->name('expense.edit');
         Route::get('/delete/expense/{id}', 'destroy');
+    });
+
+    Route::controller(ReportController::class)->group(function(){
+        Route::get('/create/report', 'create')->name('create.report');
+        Route::get('/search', 'search')->name('search');
+
+    });
+
+    Route::controller(ScheduleController::class)->group(function(){
+        Route::get('/schedule/list', 'index')->name('schedule.list');
+        Route::get('/create/schedule', 'create')->name('create.schedule');
+        Route::post('/store/schedule', 'store')->name('schedule.store');
+        Route::get('/delete/task/{id}', 'destroy');
     });
 
     Route::controller(PaymentController::class)->group(function(){
