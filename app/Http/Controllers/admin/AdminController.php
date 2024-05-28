@@ -30,7 +30,7 @@ class AdminController extends Controller
 
     public function adminDashBoard()
     {
-        $data['totalDeposite'] = Payment::where('is_approve', 1)->sum('amount');
+        $data['totalDeposite'] = User::where('role', 'user')->sum('total_deposite_balance');
         $data['totalShareHolder'] = User::where('role', 'user')->count();
         $data['activeTotalShareHolder'] = User::where('role', 'user')->where('status', '1')->count();
 
