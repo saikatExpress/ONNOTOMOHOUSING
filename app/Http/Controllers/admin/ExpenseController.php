@@ -3,11 +3,13 @@
 namespace App\Http\Controllers\admin;
 
 use Carbon\Carbon;
+use App\Models\User;
 use App\Models\Expense;
 use App\Models\Category;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\ExpenseLog;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
 
@@ -25,6 +27,7 @@ class ExpenseController extends Controller
     public function create()
     {
         $data['categories'] = Category::where('status', '1')->get();
+        $data['users']      = User::where('role', 'user')->get();
 
         return view('admin.expense.create')->with($data);
     }
@@ -35,6 +38,7 @@ class ExpenseController extends Controller
             DB::beginTransaction();
 
             $validator = Validator::make($request->all(), [
+                'holder_id'   => ['required'],
                 'cost_head'   => ['required'],
                 'cost_amount' => ['required', 'integer'],
                 'cost_date'   => ['required'],
@@ -64,7 +68,17 @@ class ExpenseController extends Controller
 
             DB::commit();
             if($res){
-                return redirect()->back()->with('message', 'Expense created successfully');
+                $holders = $request->input('holder_id');
+                $result = $this->createExpenseLog($holders, $costHead, $expenseObj->id, $costDate,$costAmount,$remark);
+                if($result == true){
+                    foreach($holders as $holder){
+                        $user = User::find($holder);
+                        $intitalBalance = $user->current_balance;
+                        $newBalance = (int) $intitalBalance - (int) $costAmount;
+                        $user->update(['current_balance' => $newBalance]);
+                    }
+                    return redirect()->back()->with('message', 'Expense created successfully');
+                }
             }
 
         } catch (\Exception $e) {
@@ -72,6 +86,24 @@ class ExpenseController extends Controller
             info($e);
             return false;
         }
+    }
+
+    public function createExpenseLog($ids, $costHead,$lastId,$date,$amount,$remark)
+    {
+        foreach($ids as $id){
+            $expenseLogObj = new ExpenseLog();
+
+            $expenseLogObj->user_id      = $id;
+            $expenseLogObj->cost_head    = $costHead;
+            $expenseLogObj->expense_id   = $lastId;
+            $expenseLogObj->expense_date = $date;
+            $expenseLogObj->cost_amount  = $amount;
+            $expenseLogObj->remark       = $remark;
+
+            $expenseLogObj->save();
+        }
+
+        return true;
     }
 
     public function update(Request $request)

@@ -52,8 +52,19 @@
         </span>
         </a>
         <ul class="treeview-menu">
-            <li><a href="{{ route('create.expense') }}"><i class="fa fa-circle-o"></i> Create Expense</a></li>
-            <li><a href="{{ route('expense.list') }}"><i class="fa fa-circle-o"></i> Expense List</a></li>
+            <li>
+                <a href="{{ route('create.expense') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Create Expense
+                </a>
+            </li>
+
+            <li>
+                <a href="{{ route('expense.list') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Expense List
+                </a>
+            </li>
         </ul>
     </li>
 

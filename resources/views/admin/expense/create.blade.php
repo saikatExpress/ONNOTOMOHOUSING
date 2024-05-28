@@ -34,8 +34,21 @@
 
                 <div class="card">
                     <div class="card-body" style="background-color: #fff; border-radius:4px; padding:5px 8px 5px;">
+                        <button type="button" id="selectAllBtn" class="btn btn-sm btn-primary">Select All</button>
+                        <button type="button" id="deselectAllBtn" class="btn btn-sm btn-danger">Deselect All</button>
                         <form action="{{ route('cost.store') }}" method="post" enctype="multipart/form-data">
                             @csrf
+                            <div class="form-group">
+                                <label>Select Share Holder : </label> <br>
+                                <div id="shareHolderList">
+                                    @foreach ($users as $user)
+                                        <div style="padding: 5px 8px 5px;">
+                                            <input style="margin: 5px;" type="checkbox" value="{{ $user->id }}" name="holder_id[]">{{ $user->name . '('.$user->id.')' }}
+                                        </div>
+                                    @endforeach
+                                </div>
+                            </div>
+
                             <div class="form-group">
                                 <label for="">Cost Head <span class="text-sm text-danger"> * </span></label>
                                 <select name="cost_head" class="form-control" id="">
@@ -90,4 +103,25 @@
             </div>
         </div>
     </section>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('selectAllBtn').addEventListener('click', function() {
+                var checkboxes = document.querySelectorAll('#shareHolderList input[type="checkbox"]');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = true;
+                });
+            });
+        });
+    </script>
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            document.getElementById('deselectAllBtn').addEventListener('click', function() {
+                var checkboxes = document.querySelectorAll('#shareHolderList input[type="checkbox"]');
+                checkboxes.forEach(function(checkbox) {
+                    checkbox.checked = false;
+                });
+            });
+        });
+    </script>
 @endsection
