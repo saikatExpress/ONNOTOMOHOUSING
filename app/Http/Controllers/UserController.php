@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\User;
+use App\Models\Announce;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Auth;
@@ -13,8 +14,10 @@ class UserController extends Controller
     public function index()
     {
         $totalCashDeposite = User::where('id', Auth::id())->sum('total_deposite_balance');
+        $currentBalance    = User::where('id', Auth::id())->sum('current_balance');
+        $announces         = Announce::where('status', '1')->latest()->limit(6)->get();
 
-        return view('user.home.index', compact('totalCashDeposite'));
+        return view('user.home.index', compact('totalCashDeposite', 'announces', 'currentBalance'));
     }
 
     public function userProfile()
