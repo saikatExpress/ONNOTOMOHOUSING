@@ -24,7 +24,7 @@ return new class extends Migration
             $table->string('state', 250)->nullable();
             $table->string('city', 250)->nullable();
             $table->unsignedBigInteger('total_deposite_balance')->nullable();
-            $table->unsignedBigInteger('current_balance')->nullable();
+            $table->bigInteger('current_balance')->nullable();
             $table->string('debit_reason', 550)->nullable();
             $table->string('password');
             $table->string('user_agent', 250)->nullable();

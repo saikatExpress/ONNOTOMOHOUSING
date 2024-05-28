@@ -70,7 +70,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="">Address</label>
-                                <textarea name="" name="address" class="form-control"></textarea>
+                                <textarea name="address" class="form-control"></textarea>
                                 @error('address')
                                     <span class="invalid-feedback" role="alert">
                                         <strong>{{ $message }}</strong>

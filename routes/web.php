@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\ExpenseController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CategoryController;
@@ -63,6 +64,7 @@ Route::middleware(['auth'])->group(function(){
     });
 });
 
+// For Admin Route
 Route::middleware(['auth'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'adminDashBoard')->name('admin.dashboard');
@@ -81,6 +83,14 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/category/store', 'store')->name('category.store');
         Route::post('/category/update', 'update')->name('category.update');
         Route::get('/delete/category/{id}', 'destroy');
+    });
+
+    Route::controller(ExpenseController::class)->group(function(){
+        Route::get('/expense/list', 'index')->name('expense.list');
+        Route::get('/create/expense', 'create')->name('create.expense');
+        Route::post('/expense/store', 'store')->name('cost.store');
+        Route::post('/expense/update', 'update')->name('expense.edit');
+        Route::get('/delete/expense/{id}', 'destroy');
     });
 
     Route::controller(PaymentController::class)->group(function(){
