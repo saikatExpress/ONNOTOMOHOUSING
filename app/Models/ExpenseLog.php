@@ -30,4 +30,20 @@ class ExpenseLog extends Model
         'updated_at'   => 'datetime',
         'deleted_at'   => 'datetime',
     ];
+
+    //Relation Start
+    public function categories()
+    {
+        return $this->belongsTo(Category::class, 'cost_head', 'id');
+    }
+
+    public function users()
+    {
+        return $this->belongsTo(User::class, 'user_id', 'id');
+    }
+
+    public function expenses()
+    {
+        return $this->belongsTo(Expense::class, 'expense_id', 'id');
+    }
 }
