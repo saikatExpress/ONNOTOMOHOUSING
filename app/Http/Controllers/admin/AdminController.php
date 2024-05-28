@@ -48,11 +48,12 @@ class AdminController extends Controller
             DB::beginTransaction();
 
             $validator = Validator::make($request->all(), [
-                'profile_image' => ['required', 'image', 'max:2048'],
-                'name'          => ['required'],
-                'mobile'        => ['required'],
-                'email'         => ['required', 'unique:users'],
-                'password'      => ['required', 'min:6'],
+                'profile_image'    => ['required', 'image', 'max:2048'],
+                'name'             => ['required'],
+                'mobile'           => ['required'],
+                'email'            => ['required', 'unique:users'],
+                'deposite_balance' => ['required', 'integer'],
+                'password'         => ['required', 'min:6'],
             ]);
 
             if ($validator->fails()) {
@@ -77,6 +78,7 @@ class AdminController extends Controller
             $userObj->country                = $request->input('country');
             $userObj->city                   = $request->input('city');
             $userObj->total_deposite_balance = $request->input('deposite_balance');
+            $userObj->current_balance        = $request->input('deposite_balance');
             $userObj->password               = Hash::make($request->input('password'));
             $userObj->role                   = 'user';
             $userObj->created_by             = Auth::id();

@@ -23,14 +23,14 @@
             <i class="fa fa-files-o"></i>
             <span>User Options</span>
             <span class="pull-right-container">
-                <span class="label label-primary pull-right">4</span>
+                <span class="label label-primary pull-right">2</span>
             </span>
         </a>
         <ul class="treeview-menu">
             <li><a href="{{ route('create.user') }}"><i class="fa fa-circle-o"></i> Create User</a></li>
             <li><a href="{{ route('user.list') }}"><i class="fa fa-circle-o"></i> User List</a></li>
-            <li><a href="pages/layout/fixed.html"><i class="fa fa-circle-o"></i> Role</a></li>
-            <li><a href="pages/layout/collapsed-sidebar.html"><i class="fa fa-circle-o"></i> Permission</a></li>
+            {{-- <li><a href="#"><i class="fa fa-circle-o"></i> Role</a></li>
+            <li><a href="#"><i class="fa fa-circle-o"></i> Permission</a></li> --}}
         </ul>
     </li>
 
@@ -54,6 +54,25 @@
         <ul class="treeview-menu">
             <li><a href="{{ route('create.expense') }}"><i class="fa fa-circle-o"></i> Create Expense</a></li>
             <li><a href="{{ route('expense.list') }}"><i class="fa fa-circle-o"></i> Expense List</a></li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+        <i class="fa-solid fa-bullhorn"></i>
+        <span>Announce</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{{ route('create.expense') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Create Announce
+                </a>
+            </li>
+            <li><a href="{{ route('expense.list') }}"><i class="fa fa-circle-o"></i> Announce List</a></li>
         </ul>
     </li>
 
