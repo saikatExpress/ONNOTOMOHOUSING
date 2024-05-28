@@ -163,9 +163,13 @@ class PaymentController extends Controller
 
             if($res){
                 $user = User::find($payment->user_id);
+
                 $previousDeposite = $user->total_deposite_balance;
-                $newBalance = ($previousDeposite) ?? 0 + $payment->amount;
-                $user->update(['total_deposite_balance' => $newBalance]);
+                $newBalance       = $previousDeposite + $payment->amount;
+
+                $currentBalance = $user->current_balance + $payment->amount;
+
+                $user->update(['total_deposite_balance' => $newBalance, 'current_balance' => $currentBalance]);
                 return response()->json(['success' => true]);
             }
         }
