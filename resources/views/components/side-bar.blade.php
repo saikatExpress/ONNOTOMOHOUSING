@@ -67,12 +67,17 @@
         </a>
         <ul class="treeview-menu">
             <li>
-                <a href="{{ route('create.expense') }}">
+                <a href="{{ route('create.announce') }}">
                     <i class="fa fa-circle-o"></i>
                     Create Announce
                 </a>
             </li>
-            <li><a href="{{ route('expense.list') }}"><i class="fa fa-circle-o"></i> Announce List</a></li>
+            <li>
+                <a href="{{ route('announce.list') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Announce List
+                </a>
+            </li>
         </ul>
     </li>
 

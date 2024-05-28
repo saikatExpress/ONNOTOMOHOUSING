@@ -77,8 +77,8 @@ class AdminController extends Controller
             $userObj->address                = $request->input('address');
             $userObj->country                = $request->input('country');
             $userObj->city                   = $request->input('city');
-            $userObj->total_deposite_balance = $request->input('deposite_balance');
-            $userObj->current_balance        = $request->input('deposite_balance');
+            $userObj->total_deposite_balance = (int) $request->input('deposite_balance');
+            $userObj->current_balance        = (int) $request->input('deposite_balance');
             $userObj->password               = Hash::make($request->input('password'));
             $userObj->role                   = 'user';
             $userObj->created_by             = Auth::id();

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\admin\AdminController;
+use App\Http\Controllers\admin\AnnounceController;
 use App\Http\Controllers\admin\ExpenseController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
@@ -83,6 +84,14 @@ Route::middleware(['auth'])->group(function(){
         Route::post('/category/store', 'store')->name('category.store');
         Route::post('/category/update', 'update')->name('category.update');
         Route::get('/delete/category/{id}', 'destroy');
+    });
+
+    Route::controller(AnnounceController::class)->group(function(){
+        Route::get('/announce/list', 'index')->name('announce.list');
+        Route::get('/create/announce', 'create')->name('create.announce');
+        Route::post('/announce/store', 'store')->name('announce.store');
+        Route::post('/announce/edit', 'update')->name('announce.edit');
+        Route::get('/delete/announce/{id}', 'destroy');
     });
 
     Route::controller(ExpenseController::class)->group(function(){
