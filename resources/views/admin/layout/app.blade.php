@@ -261,10 +261,10 @@
                         <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="dist/img/user2-160x160.jpg" class="img-circle" alt="User Image">
+                            <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
 
                             <p>
-                            Alexander Pierce - Web Developer
+                            {{ auth()->user()->name }} - Admin
                             <small>Member since Nov. 2012</small>
                             </p>
                         </li>
