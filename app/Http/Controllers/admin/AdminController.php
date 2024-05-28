@@ -8,6 +8,7 @@ use Illuminate\Support\Str;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use App\Http\Controllers\Controller;
+use App\Models\Expense;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Validator;
@@ -28,10 +29,18 @@ class AdminController extends Controller
         return view('admin.user.index')->with($data);
     }
 
+    public function dueIndex()
+    {
+        $data['users'] = User::where('role', 'user')->where('current_balance' ,'<', 0)->get();
+
+        return view('admin.user.due')->with($data);
+    }
+
     public function adminDashBoard()
     {
         $data['totalDeposite'] = User::where('role', 'user')->sum('total_deposite_balance');
         $data['totalShareHolder'] = User::where('role', 'user')->count();
+        $data['debitbalance'] = Expense::sum('cost_amount');
         $data['activeTotalShareHolder'] = User::where('role', 'user')->where('status', '1')->count();
 
         return view('admin.home.index')->with($data);

@@ -88,7 +88,11 @@
                         </div>
                         <div class="text-end pt-1">
                             <p class="text-sm mb-0 text-capitalize">Current Balance</p>
-                            <h4 class="mb-0">{{ number_format($currentBalance) }}</h4>
+                            @if ($currentBalance > 0)
+                                <h4 class="mb-0">{{ number_format($currentBalance) }}</h4>
+                            @else
+                                <h4 class="mb-0 text-danger">{{ number_format($currentBalance) }}</h4>
+                            @endif
                         </div>
                         </div>
                         <hr class="dark horizontal my-0">

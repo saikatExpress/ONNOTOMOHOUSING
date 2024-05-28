@@ -23,12 +23,13 @@
             <i class="fa fa-files-o"></i>
             <span>User Options</span>
             <span class="pull-right-container">
-                <span class="label label-primary pull-right">2</span>
+                <span class="label label-primary pull-right">3</span>
             </span>
         </a>
         <ul class="treeview-menu">
             <li><a href="{{ route('create.user') }}"><i class="fa fa-circle-o"></i> Create User</a></li>
             <li><a href="{{ route('user.list') }}"><i class="fa fa-circle-o"></i> User List</a></li>
+            <li><a href="{{ route('dueuser.list') }}"><i class="fa fa-circle-o"></i> Due Share Holder List</a></li>
             {{-- <li><a href="#"><i class="fa fa-circle-o"></i> Role</a></li>
             <li><a href="#"><i class="fa fa-circle-o"></i> Permission</a></li> --}}
         </ul>
@@ -70,8 +71,50 @@
 
     <li class="treeview">
         <a href="#">
+        <i class="fa-solid fa-flag"></i>
+        <span>Report</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{{ route('create.expense') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Debit/Credit Report
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
         <i class="fa-solid fa-bullhorn"></i>
         <span>Announce</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{{ route('create.announce') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Create Announce
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('announce.list') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Announce List
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+        <i class="fa-solid fa-calendar-days"></i>
+        <span>Task Schedule</span>
         <span class="pull-right-container">
             <i class="fa fa-angle-left pull-right"></i>
         </span>
