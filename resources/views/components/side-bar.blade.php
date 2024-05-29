@@ -127,9 +127,33 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('announce.list') }}">
+                <a href="{{ route('schedule.list') }}">
                     <i class="fa fa-circle-o"></i>
                     Schedule List
+                </a>
+            </li>
+        </ul>
+    </li>
+
+    <li class="treeview">
+        <a href="#">
+        <i class="fa-solid fa-signs-post"></i>
+        <span>Post</span>
+        <span class="pull-right-container">
+            <i class="fa fa-angle-left pull-right"></i>
+        </span>
+        </a>
+        <ul class="treeview-menu">
+            <li>
+                <a href="{{ route('create.schedule') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Create Post
+                </a>
+            </li>
+            <li>
+                <a href="{{ route('schedule.list') }}">
+                    <i class="fa fa-circle-o"></i>
+                    Post List
                 </a>
             </li>
         </ul>
