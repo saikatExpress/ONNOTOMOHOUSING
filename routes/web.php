@@ -3,6 +3,7 @@
 use App\Http\Controllers\admin\AdminController;
 use App\Http\Controllers\admin\AnnounceController;
 use App\Http\Controllers\admin\ExpenseController;
+use App\Http\Controllers\admin\PostController;
 use App\Http\Controllers\AuthController;
 use App\Http\Controllers\BillingController;
 use App\Http\Controllers\CategoryController;
@@ -110,6 +111,10 @@ Route::middleware(['auth'])->group(function(){
         Route::get('/search', 'search')->name('search');
         Route::get('/generate-pdf', 'generatePdf');
 
+    });
+
+    Route::controller(PostController::class)->group(function(){
+        Route::get('/create/post', 'create')->name('create.post');
     });
 
     Route::controller(ScheduleController::class)->group(function(){

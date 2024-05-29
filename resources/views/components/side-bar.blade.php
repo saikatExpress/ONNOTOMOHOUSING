@@ -145,7 +145,7 @@
         </a>
         <ul class="treeview-menu">
             <li>
-                <a href="{{ route('create.schedule') }}">
+                <a href="{{ route('create.post') }}">
                     <i class="fa fa-circle-o"></i>
                     Create Post
                 </a>
