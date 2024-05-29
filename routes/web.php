@@ -108,6 +108,7 @@ Route::middleware(['auth'])->group(function(){
     Route::controller(ReportController::class)->group(function(){
         Route::get('/create/report', 'create')->name('create.report');
         Route::get('/search', 'search')->name('search');
+        Route::get('/generate-pdf', 'generatePdf');
 
     });
 

@@ -2,9 +2,12 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Expense;
 use App\Models\User;
+use App\Models\Expense;
+use App\Models\Payment;
+use App\Models\ExpenseLog;
 use Illuminate\Http\Request;
+use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 class ReportController extends Controller
 {
@@ -17,32 +20,47 @@ class ReportController extends Controller
 
     public function search(Request $request)
     {
-        $query = Expense::query();
-        return $query;
+        $holderId   = $request->input('holder_id');
+        $amountType = $request->input('amount_type');
+        $fromDate   = $request->input('from_date');
+        $toDate     = $request->input('to_date');
 
-        if ($request->holder_id) {
-            $query->where('holder_id', $request->holder_id);
+        // Perform search based on amount type
+        if ($amountType === 'credit') {
+            // Search in payments table
+            $payments = Payment::query()
+                ->where('user_id', $holderId)
+                ->whereBetween('created_at', [$fromDate, $toDate])
+                ->get();
+
+            // Return the view with payment results
+            return view('admin.report.search', ['payments' => $payments]);
+        } elseif ($amountType === 'debit') {
+            // Search in expenselog table
+            $expenses = ExpenseLog::query()
+                ->where('user_id', $holderId)
+                ->whereBetween('expense_date', [$fromDate, $toDate])
+                ->get();
+
+            // Return the view with expense results
+            return view('search_results', ['expenses' => $expenses]);
+        } else {
+            // Handle invalid amount type
+            return response()->json(['error' => 'Invalid amount type']);
         }
+    }
 
-        if ($request->amount_type) {
-            $query->where('amount_type', $request->amount_type);
-        }
+    public function generatePdf(Request $request)
+    {
+        // Retrieve data or perform any necessary logic
+        $data = [
+            'name' => 'Saikat Talukder',
+            'email' => 'saikat@gmail.com',
+        ];
+        // Generate PDF using Snappy
+        $pdf = PDF::loadView('admin.pdf.invoice', $data);
 
-        if ($request->from_date) {
-            $query->whereDate('created_at', '>=', $request->from_date);
-        }
-
-        if ($request->to_date) {
-            $query->whereDate('created_at', '<=', $request->to_date);
-        }
-
-        return DataTables::of($query)
-            ->addColumn('holder_name', function ($row) {
-                return $row->holder->name; // Assuming there's a relationship defined in your model
-            })
-            ->editColumn('date', function ($row) {
-                return $row->created_at->format('d M Y, h:i A');
-            })
-            ->make(true);
+        // Set the content type to PDF
+        return $pdf->download('payment_results.pdf');
     }
 }

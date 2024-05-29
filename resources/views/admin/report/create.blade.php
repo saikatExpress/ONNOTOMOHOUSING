@@ -1,5 +1,13 @@
 @extends('admin.layout.app')
 
+<style>
+    #searchResults {
+        background-color: #fff;
+        padding: 5px;
+        border-radius: 4px;
+        margin-top: 10px;
+    }
+</style>
 @section('content')
 
     <section class="content-header">
@@ -34,7 +42,7 @@
                 </div>
                 <div class="col-md-3">
                     <label for="">Amounty Type</label>
-                    <select name="holder_id" id="holderId" class="form-control">
+                    <select name="amount_type" id="amountType" class="form-control">
                         <option value="" disabled selected>Select</option>
                         <option value="credit">Credit</option>
                         <option value="debit">Debit</option>
@@ -57,57 +65,90 @@
                 </div>
             </form>
         </div>
+        <hr>
         <div class="row">
+            <div class="col-md-3">
+                <a href="#" id="downloadExcel" class="btn btn-sm btn-success">Download Excel</a>
+                <a href="#" id="downloadPdf" class="btn btn-sm btn-success">Download PDF</a>
+            </div>
             <div class="col-md-12">
-                <table id="resultsTable" class="table table-bordered">
-                    <thead>
-                        <tr>
-                            <th>ID</th>
-                            <th>Share Holder</th>
-                            <th>Amount Type</th>
-                            <th>Date</th>
-                            <th>Amount</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <!-- Results will be appended here -->
-                    </tbody>
-                </table>
+                <div id="searchResults"></div>
             </div>
         </div>
     </section>
 
     <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+
     <script>
         $(document).ready(function() {
-            // Initialize DataTable
-            var table = $('#resultsTable').DataTable({
-                processing: true,
-                serverSide: true,
-                ajax: {
-                    url: '{{ route('search') }}',
-                    data: function(d) {
-                        d.holder_id = $('#holderId').val();
-                        d.amount_type = $('#amountType').val();
-                        d.from_date = $('#fromDate').val();
-                        d.to_date = $('#toDate').val();
+            // Submit form via AJAX
+            $('#searchForm').submit(function(e) {
+                e.preventDefault(); // Prevent form submission
+
+                var formData = $(this).serialize(); // Serialize form data
+                var url = '/search'; // Adjust URL based on your route
+
+                $.ajax({
+                    type: 'GET',
+                    url: url,
+                    data: formData,
+                    success: function(response) {
+                        $('#searchResults').html(response);
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
                     }
-                },
-                columns: [
-                    { data: 'id', name: 'id' },
-                    { data: 'holder_name', name: 'holder_name' },
-                    { data: 'amount_type', name: 'amount_type' },
-                    { data: 'date', name: 'date' },
-                    { data: 'amount', name: 'amount' }
-                ]
+                });
             });
 
-            // Search form submit
-            $('#searchForm').on('submit', function(e) {
+            $('#downloadExcel').click(function(e) {
                 e.preventDefault();
-                table.draw();
+
+                // Collect table data
+                var csv = [];
+                var rows = $('#searchResults table tbody tr');
+                rows.each(function(index, row) {
+                    var rowData = [];
+                    $(row).find('td').each(function(index, cell) {
+                        rowData.push($(cell).text().trim());
+                    });
+                    csv.push(rowData.join(','));
+                });
+
+                // Convert data to CSV format
+                var csvContent = "data:text/csv;charset=utf-8," + csv.join('\n');
+
+                // Create download link
+                var encodedUri = encodeURI(csvContent);
+                var link = document.createElement("a");
+                link.setAttribute("href", encodedUri);
+                link.setAttribute("download", "data.csv");
+                document.body.appendChild(link);
+
+                // Trigger download
+                link.click();
             });
+
+
+            // Download PDF
+            $('#downloadPdf').click(function(e) {
+                e.preventDefault();
+
+                // Trigger AJAX request to generate PDF
+                $.ajax({
+                    url: '/generate-pdf',
+                    type: 'GET',
+                    success: function(response) {
+                        // Redirect to the generated PDF file
+                        window.location.href = response.url;
+                    },
+                    error: function(xhr, status, error) {
+                        console.error(error);
+                    }
+                });
+            });
+
         });
     </script>
-
 @endsection
