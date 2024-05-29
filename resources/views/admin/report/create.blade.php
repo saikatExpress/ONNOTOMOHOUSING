@@ -33,7 +33,7 @@
                     <div class="form-group">
                         <label for="">Share Holder</label>
                         <select name="holder_id" id="holderId" class="form-control">
-                            <option value="" disabled selected>Select</option>
+                            <option value="0">Select</option>
                             @foreach ($users as $user)
                                 <option value="{{ $user->id }}">{{ $user->name }}</option>
                             @endforeach

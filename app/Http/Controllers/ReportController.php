@@ -25,6 +25,25 @@ class ReportController extends Controller
         $fromDate   = $request->input('from_date');
         $toDate     = $request->input('to_date');
 
+        if($holderId == 0){
+            if($amountType === 'credit'){
+                $payments = Payment::query()
+                ->whereBetween('created_at', [$fromDate, $toDate])
+                ->get();
+
+                // Return the view with payment results
+                return view('admin.report.credit', ['payments' => $payments]);
+            }
+            if($amountType === 'debit'){
+                $expenses = ExpenseLog::query()
+                ->whereBetween('created_at', [$fromDate, $toDate])
+                    ->get();
+
+                // Return the view with expense results
+                return view('admin.report.allDebit', ['expenses' => $expenses]);
+            }
+        }
+
         // Perform search based on amount type
         if ($amountType === 'credit') {
             // Search in payments table
@@ -36,14 +55,13 @@ class ReportController extends Controller
             // Return the view with payment results
             return view('admin.report.search', ['payments' => $payments]);
         } elseif ($amountType === 'debit') {
-            // Search in expenselog table
             $expenses = ExpenseLog::query()
                 ->where('user_id', $holderId)
-                ->whereBetween('expense_date', [$fromDate, $toDate])
+                ->whereBetween('created_at', [$fromDate, $toDate])
                 ->get();
 
             // Return the view with expense results
-            return view('search_results', ['expenses' => $expenses]);
+            return view('admin.report.debit', ['expenses' => $expenses]);
         } else {
             // Handle invalid amount type
             return response()->json(['error' => 'Invalid amount type']);
