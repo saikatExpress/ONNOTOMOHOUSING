@@ -115,6 +115,8 @@ Route::middleware(['auth'])->group(function(){
 
     Route::controller(PostController::class)->group(function(){
         Route::get('/create/post', 'create')->name('create.post');
+        Route::post('/post/store', 'store')->name('post.store');
+        Route::post('/comment/store', 'commentStore')->name('comments.store');
     });
 
     Route::controller(ScheduleController::class)->group(function(){
