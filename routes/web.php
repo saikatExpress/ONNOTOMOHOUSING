@@ -51,7 +51,7 @@ Route::controller(AuthController::class)->group(function(){
     Route::post('/log/store', 'authCheck')->name('log.store');
 });
 
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'checkUser'])->group(function(){
     Route::controller(UserController::class)->group(function(){
         Route::get('/user/dashboard', 'index')->name('user.dashboard');
         Route::get('/user/profile', 'userProfile')->name('user.profile');
@@ -69,7 +69,7 @@ Route::middleware(['auth'])->group(function(){
 });
 
 // For Admin Route
-Route::middleware(['auth'])->group(function(){
+Route::middleware(['auth', 'CheckAdmin'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'adminDashBoard')->name('admin.dashboard');
         Route::get('/user/list', 'index')->name('user.list');

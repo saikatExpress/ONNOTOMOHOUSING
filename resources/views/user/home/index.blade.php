@@ -1,35 +1,35 @@
 
     @extends('user.layout.app')
     <style>
-    .ticker-wrapper {
-        background-color: #007bff;
-        color: white;
-        overflow: hidden;
-        position: relative;
-        height: 50px;
-        display: flex;
-        align-items: center;
-    }
+        .ticker-wrapper {
+            background-color: #007bff;
+            color: white;
+            overflow: hidden;
+            position: relative;
+            height: 50px;
+            display: flex;
+            align-items: center;
+        }
 
-    .ticker {
-        display: flex;
-        animation: ticker 30s linear infinite;
-    }
+        .ticker {
+            display: flex;
+            animation: ticker 30s linear infinite;
+        }
 
-    .ticker-item {
-        padding: 0 50px;
-        white-space: nowrap;
-        font-size: 1.2em;
-        display: flex;
-        align-items: center;
-        height: 100%;
-    }
+        .ticker-item {
+            padding: 0 50px;
+            white-space: nowrap;
+            font-size: 1.2em;
+            display: flex;
+            align-items: center;
+            height: 100%;
+        }
 
-    @keyframes ticker {
-        0% { transform: translateX(100%); }
-        100% { transform: translateX(-100%); }
-    }
-</style>
+        @keyframes ticker {
+            0% { transform: translateX(100%); }
+            100% { transform: translateX(-100%); }
+        }
+    </style>
 
     @section('content')
         <div class="container-fluid py-4">
