@@ -81,6 +81,8 @@ Route::middleware(['auth', 'CheckAdmin'])->group(function(){
 
     Route::controller(BillingController::class)->group(function(){
         Route::get('/user/payment', 'billIndex')->name('user.payment');
+        Route::get('/make/invoice/{id}', 'makeInvoice')->name('make.invoice');
+        Route::get('/invoice/pdf/{id}', 'generatePdf')->name('invoice.pdf');
     });
 
     Route::controller(CategoryController::class)->group(function(){

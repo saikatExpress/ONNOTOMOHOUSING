@@ -65,7 +65,11 @@
                                             </td>
                                             <td>{{ $payment->user->name }}</td>
                                             <td>{{ $payment->user->mobile }}</td>
-                                            <td>{{ $payment->user->whatsapp }}</td>
+                                            <td>
+                                                <a href="https://wa.me/880{{ $payment->user->whatsapp }}" target="_blank">
+                                                    {{ $payment->user->whatsapp }}
+                                                </a>
+                                            </td>
                                             <td>{{ number_format($payment->amount) }}</td>
                                             <td>
                                                 @if ($payment->is_approve == 1)
@@ -87,6 +91,9 @@
                                                 <button type="button" class="btn btn-sm btn-danger cancelBtn" data-id="{{ $payment->id }}">
                                                     Cancel
                                                 </button>
+                                                <a href="{{ route('make.invoice', ['id' => $payment->id]) }}" class="btn btn-sm btn-primary">
+                                                    Invoice
+                                                </a>
                                             </td>
                                         </tr>
                                     @endforeach
