@@ -73,7 +73,11 @@ Route::middleware(['auth', 'CheckAdmin'])->group(function(){
     Route::controller(AdminController::class)->group(function(){
         Route::get('/admin/dashboard', 'adminDashBoard')->name('admin.dashboard');
         Route::get('/user/list', 'index')->name('user.list');
+        Route::get('/profile', 'profile')->name('admin.profile');
+        Route::post('/admin/profile/update', 'update')->name('admin_profile.update');
         Route::get('/due/shareholder/list', 'dueIndex')->name('dueuser.list');
+        Route::get('/check/password/{input}', 'checkPassword');
+        Route::post('/update/password', 'updatePassword')->name('update.password');
         Route::get('/create/user', 'create')->name('create.user');
         Route::post('/user/store', 'store')->name('user.store');
     });

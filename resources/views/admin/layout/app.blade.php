@@ -182,8 +182,12 @@
                     <!-- User Account: style can be found in dropdown.less -->
                     <li class="dropdown user user-menu">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown">
-                        <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="user-image" alt="User Image">
-                        <span class="hidden-xs">{{ auth()->user()->name }}</span>
+                            @if (auth()->user()->profile_image)
+                                <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" class="user-image" alt="User Image">
+                            @else
+                                <img src="{{ asset('logos/avatar-3637425_640.webp') }}" class="user-image" alt="User Image">
+                            @endif
+                            <span class="hidden-xs">{{ auth()->user()->name }}</span>
                         </a>
                         <ul class="dropdown-menu">
                         <!-- User image -->
@@ -213,10 +217,10 @@
                         <!-- Menu Footer-->
                         <li class="user-footer">
                             <div class="pull-left">
-                            <a href="#" class="btn btn-default btn-flat">Profile</a>
+                                <a href="{{ route('admin.profile') }}" class="btn btn-default btn-flat">Profile</a>
                             </div>
                             <div class="pull-right">
-                            <a href="{{ route('logout.us') }}" class="btn btn-default btn-flat">Sign out</a>
+                                <a href="{{ route('logout.us') }}" class="btn btn-default btn-flat">Sign out</a>
                             </div>
                         </li>
                         </ul>
@@ -237,7 +241,12 @@
             <!-- Sidebar user panel -->
             <div class="user-panel">
                 <div class="pull-left image">
-                    <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                    @if (auth()->user()->profile_image)
+                        <img class="img-circle" src="{{ asset('storage/' . auth()->user()->profile_image) }}" alt="User Image">
+                    @else
+                        <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                    @endif
+
                 </div>
                 <div class="pull-left info">
                     <p>{{ auth()->user()->name }}</p>
