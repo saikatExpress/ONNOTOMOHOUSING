@@ -37,13 +37,13 @@
                 <div class="card">
 
                     @if (session('error'))
-                        <div class="alert alert-danger text-white">
+                        <div class="alert alert-danger text-white" id="errorAlert">
                             {{ session('error') }}
                         </div>
                     @endif
 
                     @if (session('message'))
-                        <div class="alert alert-success" id="successMessage">
+                        <div class="alert alert-success" id="successAlert">
                             {{ session('message') }}
                         </div>
                     @endif
@@ -206,6 +206,19 @@
     </div>
 
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script>
+        $(document).ready(function() {
+            // Automatically hide success message after 2 seconds
+            setTimeout(function() {
+                $('#successAlert').fadeOut('slow');
+            }, 2000);
+
+            // Automatically hide error message after 2 seconds
+            setTimeout(function() {
+                $('#errorAlert').fadeOut('slow');
+            }, 2000);
+        });
+    </script>
     <script>
         $(document).ready(function(){
             $(document).on('click', '.editBtn', function(){

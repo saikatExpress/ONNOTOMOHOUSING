@@ -22,13 +22,13 @@
                 <div class="card">
 
                     @if (session('error'))
-                        <div class="alert alert-danger text-white">
+                        <div class="alert alert-danger text-white" id="errorAlert">
                             {{ session('error') }}
                         </div>
                     @endif
 
                     @if (session('message'))
-                        <div class="alert alert-success" id="successMessage">
+                        <div class="alert alert-success" id="successAlert">
                             {{ session('message') }}
                         </div>
                     @endif
@@ -209,6 +209,19 @@
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
     <script src="{{ asset('user/custom/js/payment.js') }}"></script>
+    <script>
+        $(document).ready(function() {
+            // Automatically hide success message after 2 seconds
+            setTimeout(function() {
+                $('#successAlert').fadeOut('slow');
+            }, 2000);
+
+            // Automatically hide error message after 2 seconds
+            setTimeout(function() {
+                $('#errorAlert').fadeOut('slow');
+            }, 2000);
+        });
+    </script>
     <script>
         $(document).ready(function(){
             $('.thumbnail').hover(function(event) {
