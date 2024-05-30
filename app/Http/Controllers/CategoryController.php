@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Validator;
 
 class CategoryController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $categories = Category::all();

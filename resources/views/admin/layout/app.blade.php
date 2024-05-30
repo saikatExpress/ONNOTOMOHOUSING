@@ -192,11 +192,14 @@
                         <ul class="dropdown-menu">
                         <!-- User image -->
                         <li class="user-header">
-                            <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
-
+                            @if (auth()->user()->profile_image)
+                                <img src="{{ asset('storage/' . auth()->user()->profile_image) }}" class="img-circle" alt="User Image">
+                            @else
+                                <img src="{{ asset('admin/dist/img/user2-160x160.jpg') }}" class="img-circle" alt="User Image">
+                            @endif
                             <p>
-                            {{ auth()->user()->name }} - Admin
-                            <small>Member since Nov. 2012</small>
+                                {{ auth()->user()->name }} - Admin
+                                <small>Member since Nov. 2024</small>
                             </p>
                         </li>
                         <!-- Menu Body -->

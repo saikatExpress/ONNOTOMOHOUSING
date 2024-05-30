@@ -15,6 +15,13 @@ use Illuminate\Support\Facades\Validator;
 
 class ExpenseController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $data['categories'] = Category::where('status', '1')->get();

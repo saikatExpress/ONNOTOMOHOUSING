@@ -11,6 +11,13 @@ use Illuminate\Support\Facades\Auth;
 
 class BillingController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $data['billings']          = ExpenseLog::with('categories', 'expenses')->where('user_id', Auth::id())->get();

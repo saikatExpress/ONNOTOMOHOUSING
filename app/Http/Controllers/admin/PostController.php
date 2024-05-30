@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PostController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $data['posts'] = Post::with('user')->get();

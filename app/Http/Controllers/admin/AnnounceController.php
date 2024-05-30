@@ -13,6 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class AnnounceController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $data['announces'] = Announce::with('creator')->get();

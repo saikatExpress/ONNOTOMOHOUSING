@@ -7,10 +7,18 @@ use App\Models\Expense;
 use App\Models\Payment;
 use App\Models\ExpenseLog;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Barryvdh\Snappy\Facades\SnappyPdf as PDF;
 
 class ReportController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function create()
     {
         $data['users'] = User::where('role', 'user')->get();

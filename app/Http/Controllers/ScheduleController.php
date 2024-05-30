@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Validator;
 
 class ScheduleController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $data['schedules'] = Schedule::with('holders')->latest()->get();

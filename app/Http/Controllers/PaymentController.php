@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Storage;
 
 class PaymentController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         return view('user.payment.index');

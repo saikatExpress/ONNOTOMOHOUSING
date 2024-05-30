@@ -12,6 +12,13 @@ use Illuminate\Support\Facades\Storage;
 
 class UserController extends Controller
 {
+    public function __construct()
+    {
+        if(!Auth::check()){
+            return redirect()->route('logout.us');
+        }
+    }
+
     public function index()
     {
         $totalCashDeposite = User::where('id', Auth::id())->sum('total_deposite_balance');

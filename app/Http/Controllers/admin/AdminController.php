@@ -120,6 +120,92 @@ class AdminController extends Controller
         }
     }
 
+    public function userpassUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'password' => ['required']
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $userId   = $request->input('userId');
+            $password = $request->input('password');
+
+            $user = User::findOrFail($userId);
+
+            if($user){
+                $user->password = Hash::make($password);
+                $res = $user->save();
+
+                DB::commit();
+                if($res){
+                    return response()->json(['success' => true]);
+                }
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+            return back();
+        }
+    }
+
+    public function userUpdate(Request $request)
+    {
+        try {
+            DB::beginTransaction();
+
+            $validator = Validator::make($request->all(), [
+                'name'     => ['required'],
+                'email'    => ['required', 'email'],
+                'mobile'   => ['required', 'max:15'],
+                'whatsapp' => ['required', 'max:15'],
+            ]);
+
+            if ($validator->fails()) {
+                return redirect()->back()
+                            ->withErrors($validator)
+                            ->withInput();
+            }
+
+            $userId   = $request->input('userId');
+            $name   = $request->input('name');
+            $email   = $request->input('email');
+            $mobile   = $request->input('mobile');
+            $whatsapp   = $request->input('whatsapp');
+            $status   = $request->input('status');
+
+            $user = User::findOrFail($userId);
+
+            if($user){
+                $user->name     = $name;
+                $user->email    = $email;
+                $user->mobile   = $mobile;
+                $user->whatsapp = $whatsapp;
+                $user->status   = $status;
+
+                $res = $user->save();
+
+                DB::commit();
+                if($res){
+                    return redirect()->back()->with('message', 'User update successfully');
+                }
+            }
+
+        } catch (\Exception $e) {
+            DB::rollback();
+            info($e);
+            return back();
+        }
+    }
+
     public function dueIndex()
     {
         $data['users'] = User::where('role', 'user')->where('current_balance' ,'<', 0)->get();
