@@ -114,9 +114,13 @@ Route::middleware(['auth'])->group(function(){
     });
 
     Route::controller(PostController::class)->group(function(){
+        Route::get('/post/list', 'index')->name('post.list');
         Route::get('/create/post', 'create')->name('create.post');
         Route::post('/post/store', 'store')->name('post.store');
+        Route::get('/post/edit/{id}', 'edit')->name('post.edit');
+        Route::post('/post/update', 'update')->name('post.update');
         Route::post('/comment/store', 'commentStore')->name('comments.store');
+        Route::get('/delete/post/{id}', 'destroy');
     });
 
     Route::controller(ScheduleController::class)->group(function(){

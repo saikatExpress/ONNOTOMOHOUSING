@@ -151,7 +151,7 @@
                 </a>
             </li>
             <li>
-                <a href="{{ route('schedule.list') }}">
+                <a href="{{ route('post.list') }}">
                     <i class="fa fa-circle-o"></i>
                     Post List
                 </a>

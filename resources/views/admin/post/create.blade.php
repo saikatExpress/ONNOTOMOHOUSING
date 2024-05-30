@@ -7,7 +7,7 @@
             <small>Control panel</small>
         </h1>
         <p class="text-right">
-            <a class="btn btn-sm btn-success" href="{{ route('schedule.list') }}">
+            <a class="btn btn-sm btn-success" href="{{ route('post.list') }}">
                 Post List
             </a>
         </p>
