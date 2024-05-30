@@ -67,7 +67,7 @@ class Kernel extends HttpKernel
 
     protected $routeMiddleware = [
         // ...
-        'checkUser' => \App\Http\Middleware\CheckUser::class,
+        'checkUser' => \App\Http\Middleware\checkUser::class,
         'CheckAdmin' => \App\Http\Middleware\CheckAdmin::class,
     ];
 }

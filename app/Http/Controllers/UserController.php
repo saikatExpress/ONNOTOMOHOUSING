@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Post;
 use App\Models\User;
 use App\Models\Announce;
 use Illuminate\Http\Request;
@@ -16,8 +17,9 @@ class UserController extends Controller
         $totalCashDeposite = User::where('id', Auth::id())->sum('total_deposite_balance');
         $currentBalance    = User::where('id', Auth::id())->sum('current_balance');
         $announces         = Announce::where('status', '1')->latest()->limit(6)->get();
+        $posts             = Post::with('user')->latest()->limit(20)->get();
 
-        return view('user.home.index', compact('totalCashDeposite', 'announces', 'currentBalance'));
+        return view('user.home.index', compact('totalCashDeposite', 'announces', 'currentBalance', 'posts'));
     }
 
     public function userProfile()

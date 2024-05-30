@@ -139,6 +139,59 @@
                 </div>
 
             </div>
+            <hr>
+            <div class="row">
+                @foreach ($posts as $post)
+                    <div class="col-md-12">
+                        <div class="card mb-4">
+                            <div class="card-body">
+                                <h5 class="card-title">{{ $post->user->name }}</h5>
+                                <h6 class="card-subtitle mb-2 text-muted">{{ $post->created_at->diffForHumans() }}</h6>
+                                <p class="card-text">{{ $post->content }}</p>
+                                @if ($post->post_link)
+                                    <a href="{{ $post->post_link }}" target="_blank" class="card-link">Read More</a>
+                                @endif
+                                <div class="d-flex">
+                                    @if ($post->image)
+                                        <div>
+                                            <img src="{{ asset('storage/'.$post->image) }}" class="img-fluid" alt="Post Image">
+                                        </div>
+                                    @endif
+                                    @if ($post->video)
+                                        <div>
+                                            <video controls class="img-fluid mt-2">
+                                                <source src="{{ asset('storage/'.$post->video) }}" type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+                                        </div>
+                                    @endif
+                                </div>
+                            </div>
+                            {{-- <div class="card-footer">
+                                <form action="{{ route('comments.store') }}" method="POST">
+                                    @csrf
+                                    <input type="hidden" name="post_id" value="{{ $post->id }}">
+                                    <div class="input-group">
+                                        <input type="text" name="comment" class="form-control" placeholder="Add a comment..." required>
+                                        <div class="input-group-append">
+                                            <button class="btn btn-primary" type="submit">Comment</button>
+                                        </div>
+                                    </div>
+                                </form>
+                                <ul class="list-group list-group-flush mt-2">
+                                    @foreach ($post->comments as $comment)
+                                        <li class="list-group-item">
+                                            <strong>{{ $comment->user->name }}</strong>: {{ $comment->content }}
+                                            <br>
+                                            <small class="text-muted">{{ $comment->created_at->diffForHumans() }}</small>
+                                        </li>
+                                    @endforeach
+                                </ul>
+                            </div> --}}
+                        </div>
+                    </div>
+                @endforeach
+            </div>
 
             <footer class="footer py-4  ">
                 <div class="container-fluid">
